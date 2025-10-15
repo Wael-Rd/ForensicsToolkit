@@ -1,20 +1,15 @@
 package database
 
 import (
-	"MobileForensicsToolkit/utils"
-	"bytes"
 	"context"
 	"database/sql"
-	"encoding/hex"
 	"fmt"
-	"io"
 	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
 
 	_ "github.com/WXjzcccc/go-sqlcipher"
-	"github.com/deatil/go-cryptobin/cryptobin/crypto"
 )
 
 // Database decryption pragma constants for different encryption types
