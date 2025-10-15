@@ -215,4 +215,102 @@ const { CalWechat, CalWechatIndex, CalWildFire, CalMostone, CalTiktok, CalXiaoHo
 // Calculate WeChat password
 const calculateWechatPassword = async () => {
   if (!wechatForm.uin) {
-    MessagePlugin.warning('Please enter User ID (UIN)')\n    return\n  }\n  \n  try {\n    // This would call the backend function\n    const result = CalWechat ? await CalWechat(wechatForm.uin, wechatForm.imei) : 'demo_password'\n    wechatResult.value = result\n    MessagePlugin.success('WeChat password calculated successfully')\n  } catch (error) {\n    MessagePlugin.error('Failed to calculate password: ' + error.message)\n  }\n}\n\n// Calculate WeChat Index password\nconst calculateWechatIndexPassword = async () => {\n  if (!wechatIndexForm.uin || !wechatIndexForm.wxid) {\n    MessagePlugin.warning('Please enter both User ID (UIN) and WeChat ID (WXID)')\n    return\n  }\n  \n  try {\n    const result = CalWechatIndex ? \n      await CalWechatIndex(wechatIndexForm.uin, wechatIndexForm.wxid, wechatIndexForm.imei) : \n      'demo_index_password'\n    wechatIndexResult.value = result\n    MessagePlugin.success('WeChat index password calculated successfully')\n  } catch (error) {\n    MessagePlugin.error('Failed to calculate password: ' + error.message)\n  }\n}\n\n// Calculate WildFire password\nconst calculateWildfirePassword = async () => {\n  if (!wildfireForm.token) {\n    MessagePlugin.warning('Please enter the token')\n    return\n  }\n  \n  try {\n    const result = CalWildFire ? await CalWildFire(wildfireForm.token) : ['demo_password', 'Use SQLCipher4 for decryption']\n    wildfireResult.password = result[0]\n    wildfireResult.instruction = result[1]\n    MessagePlugin.success('WildFire password calculated successfully')\n  } catch (error) {\n    MessagePlugin.error('Failed to calculate password: ' + error.message)\n  }\n}\n\n// Get XiaoHongShu password (static)\nconst getXiaoHongShuPassword = () => {\n  quickResult.password = 'xhsdev'\n  quickResult.instruction = 'Use SQLCipher3 for decryption'\n  MessagePlugin.success('XiaoHongShu password retrieved')\n}\n\n// Calculate Mostone password\nconst calculateMostonePassword = async () => {\n  if (!mostoneUid.value) {\n    MessagePlugin.warning('Please enter Mostone UID')\n    return\n  }\n  \n  try {\n    const result = CalMostone ? await CalMostone(mostoneUid.value) : ['DEMO12', 'Use SQLCipher3 for decryption']\n    quickResult.password = result[0]\n    quickResult.instruction = result[1]\n    MessagePlugin.success('Mostone password calculated successfully')\n  } catch (error) {\n    MessagePlugin.error('Failed to calculate password: ' + error.message)\n  }\n}\n\n// Calculate TikTok password\nconst calculateTiktokPassword = async () => {\n  if (!tiktokUid.value) {\n    MessagePlugin.warning('Please enter TikTok UID')\n    return\n  }\n  \n  try {\n    const result = CalTiktok ? await CalTiktok(tiktokUid.value) : [`byte${tiktokUid.value}imwcdb${tiktokUid.value}dance`, 'Use WCDB for decryption']\n    quickResult.password = result[0]\n    quickResult.instruction = result[1]\n    MessagePlugin.success('TikTok password calculated successfully')\n  } catch (error) {\n    MessagePlugin.error('Failed to calculate password: ' + error.message)\n  }\n}\n\n// Copy to clipboard\nconst copyToClipboard = async (text) => {\n  try {\n    await navigator.clipboard.writeText(text)\n    MessagePlugin.success('Password copied to clipboard')\n  } catch (error) {\n    MessagePlugin.error('Failed to copy to clipboard')\n  }\n}\n</script>\n\n<style scoped>\n.password-calculation {\n  padding: 20px;\n}\n\n.main-card {\n  max-width: 1000px;\n  margin: 0 auto;\n}\n\n.card-header {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n\n.card-title {\n  font-size: 20px;\n  font-weight: 600;\n}\n\n.tool-card {\n  background: white;\n}\n\n.tool-card h3 {\n  margin: 0;\n  color: #1976d2;\n  font-size: 16px;\n}\n</style>
+    MessagePlugin.warning('Please enter User ID (UIN)')
+    return
+  }
+  
+  try {
+    // This would call the backend function
+    const result = CalWechat ? await CalWechat(wechatForm.uin, wechatForm.imei) : 'demo_password'
+    wechatResult.value = result
+    MessagePlugin.success('WeChat password calculated successfully')
+  } catch (error) {
+    MessagePlugin.error('Failed to calculate password: ' + error.message)
+  }
+}
+
+// Calculate WeChat Index password
+const calculateWechatIndexPassword = async () => {
+  if (!wechatIndexForm.uin || !wechatIndexForm.wxid) {
+    MessagePlugin.warning('Please enter both User ID (UIN) and WeChat ID (WXID)')
+    return
+  }
+  
+  try {
+    const result = CalWechatIndex ? 
+      await CalWechatIndex(wechatIndexForm.uin, wechatIndexForm.wxid, wechatIndexForm.imei) : 
+      'demo_index_password'
+    wechatIndexResult.value = result
+    MessagePlugin.success('WeChat index password calculated successfully')
+  } catch (error) {
+    MessagePlugin.error('Failed to calculate password: ' + error.message)
+  }
+}
+
+// Calculate WildFire password
+const calculateWildfirePassword = async () => {
+  if (!wildfireForm.token) {
+    MessagePlugin.warning('Please enter the token')
+    return
+  }
+  
+  try {
+    const result = CalWildFire ? await CalWildFire(wildfireForm.token) : ['demo_password', 'Use SQLCipher4 for decryption']
+    wildfireResult.password = result[0]
+    wildfireResult.instruction = result[1]
+    MessagePlugin.success('WildFire password calculated successfully')
+  } catch (error) {
+    MessagePlugin.error('Failed to calculate password: ' + error.message)
+  }
+}
+
+// Get XiaoHongShu password (static)
+const getXiaoHongShuPassword = () => {
+  quickResult.password = 'xhsdev'
+  quickResult.instruction = 'Use SQLCipher3 for decryption'
+  MessagePlugin.success('XiaoHongShu password retrieved')
+}
+
+// Calculate Mostone password
+const calculateMostonePassword = async () => {
+  if (!mostoneUid.value) {
+    MessagePlugin.warning('Please enter Mostone UID')
+    return
+  }
+  
+  try {
+    const result = CalMostone ? await CalMostone(mostoneUid.value) : ['DEMO12', 'Use SQLCipher3 for decryption']
+    quickResult.password = result[0]
+    quickResult.instruction = result[1]
+    MessagePlugin.success('Mostone password calculated successfully')
+  } catch (error) {
+    MessagePlugin.error('Failed to calculate password: ' + error.message)
+  }
+}
+
+// Calculate TikTok password
+const calculateTiktokPassword = async () => {
+  if (!tiktokUid.value) {
+    MessagePlugin.warning('Please enter TikTok UID')
+    return
+  }
+  
+  try {
+    const result = CalTiktok ? await CalTiktok(tiktokUid.value) : [`byte${tiktokUid.value}imwcdb${tiktokUid.value}dance`, 'Use WCDB for decryption']
+    quickResult.password = result[0]
+    quickResult.instruction = result[1]
+    MessagePlugin.success('TikTok password calculated successfully')
+  } catch (error) {
+    MessagePlugin.error('Failed to calculate password: ' + error.message)
+  }
+}
+
+// Copy to clipboard
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    MessagePlugin.success('Password copied to clipboard')
+  } catch (error) {
+    MessagePlugin.error('Failed to copy to clipboard')
+  }
+}\n</script>\n\n<style scoped>\n.password-calculation {\n  padding: 20px;\n}\n\n.main-card {\n  max-width: 1000px;\n  margin: 0 auto;\n}\n\n.card-header {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n\n.card-title {\n  font-size: 20px;\n  font-weight: 600;\n}\n\n.tool-card {\n  background: white;\n}\n\n.tool-card h3 {\n  margin: 0;\n  color: #1976d2;\n  font-size: 16px;\n}\n</style>
