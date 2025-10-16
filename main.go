@@ -1,19 +1,20 @@
 package main
 
 import (
-	"MobileForensicsToolkit/analyzers/database"
-	"MobileForensicsToolkit/analyzers/extractor"
-	"MobileForensicsToolkit/analyzers/passwdCalc"
-	"MobileForensicsToolkit/analyzers/winreg"
-	"MobileForensicsToolkit/tools/cracker"
-	"MobileForensicsToolkit/tools/timestamp"
 	"context"
 	"embed"
-	"github.com/wailsapp/wails/v2/pkg/options/windows"
+
+	"github.com/Wael-Rd/ForensicsToolkit/analyzers/database"
+	"github.com/Wael-Rd/ForensicsToolkit/analyzers/extractor"
+	"github.com/Wael-Rd/ForensicsToolkit/analyzers/passwdCalc"
+	"github.com/Wael-Rd/ForensicsToolkit/analyzers/winreg"
+	"github.com/Wael-Rd/ForensicsToolkit/tools/cracker"
+	"github.com/Wael-Rd/ForensicsToolkit/tools/timestamp"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
+	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
 //go:embed all:frontend/dist
