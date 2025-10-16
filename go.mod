@@ -1,4 +1,4 @@
-module MobileForensicsToolkit
+module github.com/Wael-Rd/ForensicsToolkit
 
 go 1.23.0
 
